@@ -30,6 +30,7 @@ jobs:
 
   
   deploy:
+    needs: [push-image]
     runs-on: ubuntu-latest
     steps:
       - name: Pull Docker Image
