@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  format:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -17,6 +17,6 @@ jobs:
       with:
         python-version: '3.10'
     - name: Install dependencies
-      run: pip install pytest
-    - name: Test with pytest
-      run: pytest .*py
+      run: pip install black
+    - name: Formatting with black
+      run: black .
