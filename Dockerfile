@@ -14,4 +14,4 @@ RUN pip install fastapi uvicorn
 EXPOSE 8001
 
 # Start FastAPI application
-CMD ["python","myfirstapp/main.py"]
+CMD ["python","main.py"]
