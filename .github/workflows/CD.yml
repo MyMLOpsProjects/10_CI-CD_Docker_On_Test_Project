@@ -40,7 +40,8 @@ jobs:
         run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD    
       - name: Pull Docker Image
         env: 
-          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }} 
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}
         run: sudo docker pull $DOCKER_USER/demo-app:latest
     
       - name: Delete Old Docker Container
@@ -48,5 +49,6 @@ jobs:
     
       - name: Run Docker Container
         env: 
-          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }} 
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}
         run: sudo docker run -it -d -p 8001:8001 --name demo-app-container $DOCKER_USER/demo-app:latest        
