@@ -20,3 +20,22 @@ jobs:
       run: pip install black
     - name: Formatting with black
       run: black .
+      
+  push-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker hub
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }} 
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build the Docker image for Fastapi app
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+        run: docker build . -f ./Dockerfile -t $DOCKER_USER/demo-app:latest
+      - name: Push the Docker Image
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+        run: docker push $DOCKER_USER/demo-app
+      - name: Logout to Docker hub
+        run: docker logout
