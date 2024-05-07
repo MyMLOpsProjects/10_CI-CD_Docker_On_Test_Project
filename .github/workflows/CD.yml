@@ -41,10 +41,10 @@ jobs:
       - name: Pull Docker Image
         env: 
           DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-        run: sudo docker pull $DOCKER_USER/demo-app-container:latest
+        run: sudo docker pull $DOCKER_USER/demo-app:latest
     
       - name: Delete Old Docker Container
-        run: sudo docker rm -f demo-app || true
+        run: sudo docker rm -f demo-app-container || true
     
       - name: Run Docker Container
         env: 
