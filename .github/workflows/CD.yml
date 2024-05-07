@@ -11,6 +11,7 @@ jobs:
   push-image:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Login to Docker hub
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }} 
@@ -26,19 +27,20 @@ jobs:
         run: docker push $DOCKER_USER/demo-app
       - name: Logout to Docker hub
         run: docker logout
+
   
-  # deploy:
-  #   runs-on: self-hosted
-  #   steps:
-  #     - name: Pull Docker Image
-  #       env: 
-  #         DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-  #       run: sudo docker pull $DOCKER_USER/demo-app-container:latest
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Pull Docker Image
+        env: 
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+        run: sudo docker pull $DOCKER_USER/demo-app-container:latest
     
-  #     - name: Delete Old Docker Container
-  #       run: sudo docker rm -f demo-app || true
+      - name: Delete Old Docker Container
+        run: sudo docker rm -f demo-app || true
     
-  #     - name: Run Docker Container
-  #       env: 
-  #         DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
-  #       run: sudo docker run -it -d -p 8001:8001 --name demo-app-container $DOCKER_USER/demo-app:latest        
+      - name: Run Docker Container
+        env: 
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+        run: sudo docker run -it -d -p 8001:8001 --name demo-app-container $DOCKER_USER/demo-app:latest        
