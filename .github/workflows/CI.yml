@@ -25,6 +25,7 @@ jobs:
     needs: [format]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Login to Docker hub
         env:
           DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }} 
