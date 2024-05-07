@@ -31,7 +31,7 @@ jobs:
   
   deploy:
     needs: [push-image]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Login to Docker hub
         env:
