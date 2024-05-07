@@ -1,0 +1,44 @@
+name: CD Pipeline
+
+# Only trigger, when the build workflow succeeded i.e. CI Pipeline
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+
+jobs:
+  push-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker hub
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }} 
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASS_TOKEN }}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - name: Build the Docker image for Fastapi app
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+        run: docker build . -f Dockerfile -t $DOCKER_USER/demo-app:latest
+      - name: Push the Docker Image
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+        run: docker push $DOCKER_USER/demo-app
+      - name: Logout to Docker hub
+        run: docker logout
+  
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Pull Docker Image
+        env: 
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+        run: sudo docker pull $DOCKER_USER/demo-app-container:latest
+    
+      - name: Delete Old Docker Container
+        run: sudo docker rm -f demo-app || true
+    
+      - name: Run Docker Container
+        env: 
+          DOCKER_USER: ${{ secrets.DOCKER_USER_NAME }}
+        run: sudo docker run -it -d -p 8001:8001 --name demo-app-container $DOCKER_USER/demo-app:latest        
