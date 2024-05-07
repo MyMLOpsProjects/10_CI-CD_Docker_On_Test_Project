@@ -45,7 +45,7 @@ jobs:
         run: docker pull $DOCKER_USER/demo-app:latest
     
       - name: Delete Old Docker Container
-        run: sudo docker rm -f demo-app-container || true
+        run: docker rm -f demo-app-container || true
     
       - name: Run Docker Container
         env: 
