@@ -31,7 +31,7 @@ jobs:
   
   deploy:
     needs: [push-image]
-    runs-on: [self-hosted, macOS, X64]
+    runs-on: ip-172-31-56-199
     steps:
       - name: Login to Docker hub
         env:
