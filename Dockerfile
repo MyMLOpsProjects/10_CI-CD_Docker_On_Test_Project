@@ -2,7 +2,7 @@
 FROM python:3.10
 
 # copy application files
-ADD . /myfirstapp/
+ADD . .
 
 # Update pip
 RUN pip install --upgrade pip
