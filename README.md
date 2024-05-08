@@ -1,4 +1,4 @@
-# 10_CI-CD_On_Test_Project
+# 10_CI-CD_Docker_On_Test_Project
 To demonstrate CI and how CD worflow is automated using Docker
 
 Follow the steps to run the complete CI-CD in your local PC "self-hosted"
