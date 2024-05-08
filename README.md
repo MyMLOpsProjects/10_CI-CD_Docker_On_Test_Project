@@ -11,7 +11,7 @@ Follow the steps to run the complete CI-CD in your local PC "self-hosted"
 Launch 127.0.0.1:8001/add/20/20 (Our add app)
 <img width="480" alt="image" src="https://github.com/MyMLOpsProjects/10_CI-CD_On_Test_Project/assets/90625369/9daffe95-7ab2-43b6-a60f-411ec6d5f2f4">
 - Now check the log in terminal
-<img width="480" alt="image" src="https://github.com/MyMLOpsProjects/10_CI-CD_On_Test_Project/assets/90625369/436b588b-8d66-4b36-befd-f90ebc21eabe">
+<img width="859" alt="image" src="https://github.com/MyMLOpsProjects/10_CI-CD_On_Test_Project/assets/90625369/69dd3468-9cb7-41eb-812e-849ca1992189">
 
 Done!!
 
